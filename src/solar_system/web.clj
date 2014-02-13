@@ -21,12 +21,15 @@
       (basic/wrap-basic-authentication authenticated?)))
 
 (defroutes app
-  (ANY "/repl" {:as req} (drawbridge req))
-  (GET "/" [] (slurp "resources/index.html")) ; wherever your file is
-  (route/resources "/") ; special route for serving static files like css
-                        ; default root directory is resources/public/
-                        ; you might need this to serve CSS I'm not sure
-  (route/not-found (slurp (io/resource "404.html"))))
+  (ANY "/repl" {:as req}
+       (drawbridge req))
+  (GET "/" []
+       {:status 200
+        :headers {"Content-Type" "text/html"}
+        :body (slurp (io/resource "index.html"))})
+  (route/resources "/")
+  (ANY "*" []
+       (route/not-found (slurp (io/resource "404.html")))))
 
 (defn wrap-error-page [handler]
   (fn [req]
