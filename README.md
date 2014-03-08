@@ -34,6 +34,9 @@ get the app created:
 
 You can deploy the skeleton project immediately:
 
+
+Or you can visit the uri here to see the it in action: https://fierce-island-4087.herokuapp.com/
+
     $ git push heroku master
     Writing objects: 100% (13/13), 2.87 KiB, done.
     Total 13 (delta 0), reused 0 (delta 0)
