@@ -1,6 +1,6 @@
 (defproject solar_system "1.0.0-SNAPSHOT"
   :description "FIXME: write description"
-  :url "http://solar_system.herokuapp.com"
+  :url "http://solar_system.herokuapp.com/index.html"
   :license {:name "FIXME: choose"
             :url "http://example.com/FIXME"}
   :dependencies [[org.clojure/clojure "1.5.1"]
