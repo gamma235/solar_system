@@ -1,4 +1,4 @@
-# solar_system
+# solar_system  https://fierce-island-4087.herokuapp.com/
 
 A [Heroku](http://www.heroku.com) web app using Compojure.
 
@@ -35,7 +35,6 @@ get the app created:
 You can deploy the skeleton project immediately:
 
 
-Or you can visit the uri here to see the it in action: https://fierce-island-4087.herokuapp.com/
 
     $ git push heroku master
     Writing objects: 100% (13/13), 2.87 KiB, done.
