@@ -8,6 +8,7 @@
             [ring.middleware.session.cookie :as cookie]
             [ring.adapter.jetty :as jetty]
             [ring.middleware.basic-authentication :as basic]
+            [ring.util.response :as resp]
             [cemerick.drawbridge :as drawbridge]
             [environ.core :refer [env]]))
 
@@ -20,13 +21,18 @@
       (session/wrap-session)
       (basic/wrap-basic-authentication authenticated?)))
 
+(defn- wrap-dir-index [handler]
+  (fn [request]
+    (handler
+     (let [k (if (contains? request :path-info) :path-info :uri) v (get request k)]
+       (if (re-find #"/$" v)
+         (assoc request k (format "%sindex.html" v))
+         request)))))
+
 (defroutes app
   (ANY "/repl" {:as req}
        (drawbridge req))
-  (GET "/" []
-       {:status 200
-        :headers {"Content-Type" "text/html"}
-        :body (slurp (io/resource "index.html"))})
+  (GET "/" [] (resp/resource-response "index.html" {:root "public"}))
   (route/resources "/")
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
